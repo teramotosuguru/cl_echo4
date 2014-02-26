@@ -25,8 +25,8 @@ class HistoryRepository extends CI_Model
         $object =  $this->db->query($sql, $params)->result();
         $objectArray = array();
         foreach ( $object as $key => $value) {
-            $objectArray["id"] = $value->id;
-            $objectArray["text"] = $value->text;
+            $objectArray[$key]["id"] = $value->id;
+            $objectArray[$key]["text"] = $value->text;
         }
         return $objectArray;
     }
@@ -44,8 +44,8 @@ class HistoryRepository extends CI_Model
         $object = $this->db->query($sql, $params)->result();
         $objectArray = array();
         foreach ( $object as $key => $value) {
-            $objectArray["id"] = $value->id;
-            $objectArray["text"] = $value->text;
+            $objectArray[$key]["id"] = $value->id;
+            $objectArray[$key]["text"] = $value->text;
         }
         return $objectArray;
     }
