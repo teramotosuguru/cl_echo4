@@ -2,6 +2,9 @@
 /**
  * チェッカークラス
  */
+
+namespace Libraries\StrCheck;
+
 class Checker
 {
     private $str;
