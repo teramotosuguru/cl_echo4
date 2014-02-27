@@ -13,13 +13,10 @@ class Check_test extends CI_Controller {
         var_dump($checker->check_num());
         var_dump($checker->check_alphanumeric());
 
-        // ビルダーを生成
-        $tex = new Text_Builder($str);
-        // 関数名をセット
-        $tex->set_param(__FUNCTION__);　// normalechoの場合はこいつを呼ばない
-
-        var_dump($tex->get_text());
-
+        // テキストクラスを生成
+        $builder = new Text_Builder();
+        $builder->build($str, __FUNCTION__);
+        var_dump($builder->get_text());
 
         $this->load->view('welcome_message');
     }
