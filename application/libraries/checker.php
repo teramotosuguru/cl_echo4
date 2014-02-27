@@ -2,6 +2,9 @@
 /**
  * チェッカークラス
  */
+
+namespace Libraries\StrCheck;
+
 class Checker
 {
     private $str;
@@ -10,18 +13,18 @@ class Checker
         $this->str = $str;
     }
 
-    public function check_empty() {
-        $checker = new empty_check_builder($this->str);
+    public function checkEmpty() {
+        $checker = new EmptyCheckBuilder($this->str);
         return $checker->check($this->str);
     }
 
-    public function check_num() {
-        $checker = new num_check_builder($this->str);
+    public function checkNum() {
+        $checker = new NumCheckBuilder($this->str);
         return $checker->check($this->str);
     }
 
-    public function check_alphanumeric() {
-        $checker = new alphanumeric_check_builder($this->str);
+    public function checkAlphanumeric() {
+        $checker = new AlphaumericCheckBuilder($this->str);
         return $checker->check($this->str);
     }
 }
@@ -29,7 +32,7 @@ class Checker
 /**
  * チェッカービルダー（抽象クラス）
  */
-abstract class Check_builder
+abstract class CheckBuilder
 {
     abstract protected function check($str);
 }
@@ -37,10 +40,10 @@ abstract class Check_builder
 /**
  * 空チェック（問題なければtrue/空ならfalse）
  */
-class Empty_check_builder extends check_builder
+class EmptyCheckBuilder extends CheckBuilder
 {
     public function check($str) {
-        if(!empty($str)) {
+        if (!empty($str)) {
             return true;
         } else {
             return false;
@@ -51,11 +54,11 @@ class Empty_check_builder extends check_builder
 /**
  * 数字チェック（問題なければtrue/数字が含まれていればfalse）
  */
-class Num_check_builder extends check_builder
+class NumCheckBuilder extends CheckBuilder
 {
     public function check($str)
     {
-        if(preg_match("/[0-9]/", $str)){
+        if (preg_match("/[0-9]/", $str)){
             return false;
         } else {
             return true;
@@ -66,11 +69,11 @@ class Num_check_builder extends check_builder
 /**
  * 英数字チェック（問題なければtrue/記号等が含まれていればfalse）
  */
-class Alphanumeric_check_builder extends check_builder
+class AlphanumericCheckBuilder extends CheckBuilder
 {
     public function check($str)
     {
-        if(!preg_match("/[^a-zA-Z0-9]/", $str)){
+        if (!preg_match("/[^a-zA-Z0-9]/", $str)){
             return true;
         } else {
             return false;
