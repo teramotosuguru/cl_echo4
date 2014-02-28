@@ -1,5 +1,8 @@
 <?php
 
+use libraries\checker;
+require_once(dirname(__file__) . "/../libraries/checker.php");
+
 class Manager extends CI_Controller {
 
     /**
@@ -7,20 +10,18 @@ class Manager extends CI_Controller {
     */
     public function normal($str="")
     {
-        $this->load->library('checker');
+        /*チェックするよお*/
+        $checker = new libraries\checker\Checker();
+        var_dump($checker->checkEmpty());
+        var_dump($checker->checkNum());
+        var_dump($checker->checkAlphanumeric());
+
+
         $this->load->library('text_builder');
-        
-        $checker = new Checker($str);
-
-        var_dump($checker->check_empty());
-        var_dump($checker->check_num());
-        var_dump($checker->check_alphanumeric());
-
         // Textクラスを生成
         $builder = new Text_Builder();
-        $builder->build($str, __FUNCTION__);
-        var_dump($builder->get_text());
-
+        $tex = $builder->build($str, __FUNCTION__);
+        var_dump($tex->get_text());
 
         $this->load->view('welcome_message');
     }
@@ -32,7 +33,7 @@ class Manager extends CI_Controller {
     {
         $this->load->library('checker');
         $this->load->library('text_builder');
-        
+
         $this->load->view('welcome_message');
     }
 
@@ -43,7 +44,7 @@ class Manager extends CI_Controller {
     {
         $this->load->library('checker');
         $this->load->library('text_builder');
- 
+
         $this->load->view('welcome_message');
     }
 
@@ -54,7 +55,7 @@ class Manager extends CI_Controller {
     {
         $this->load->library('checker');
         $this->load->library('text_builder');
- 
+
         $this->load->view('welcome_message');
     }
 
@@ -65,7 +66,7 @@ class Manager extends CI_Controller {
     {
         $this->load->library('checker');
         $this->load->library('text_builder');
- 
+
         $this->load->view('welcome_message');
     }
 
@@ -76,7 +77,7 @@ class Manager extends CI_Controller {
     {
         $this->load->library('checker');
         $this->load->library('text_builder');
- 
+
         $this->load->view('welcome_message');
     }
 
@@ -88,7 +89,7 @@ class Manager extends CI_Controller {
     {
         $this->load->library('checker');
         $this->load->library('text_builder');
- 
+
         $this->load->view('welcome_message');
     }
 }
