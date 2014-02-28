@@ -5,8 +5,8 @@
 */
 class Text_Builder 
 {
-	public function build($s,$p) {
-        return new Text($s,$p);
+	public function build($s="", $p = "") {
+        return new Text($s, $p);
     }
 }
 
@@ -24,7 +24,7 @@ class Text
 		$this->param = $func_name;
 
 		// 文字列を変換
-		$this->$func_name();
+		$this->convert_text($func_name);
 	}
 
 	// 文字列のゲッター
@@ -79,6 +79,36 @@ class Text
 		}
 	
 		$this->text = $snake_text;
+	}
+
+
+		// 呼び出す関数を決定する
+	private function convert_text($param) {
+		switch ($param) {
+
+			// 大文字に変換
+			case 'bigecho':
+				$this->$param();
+				break;
+
+			// 小文字に変換
+			case 'smallecho':
+				$this->$param();
+				break;
+
+			// キャメルに変換
+			case 'camelecho':
+				$this->$param();
+				break;
+
+			// スネークに変換
+			case 'snakeecho':
+				$this->$param();
+				break;
+				
+			default:
+				break;
+		}
 	}
 
 }
