@@ -3,7 +3,7 @@
  * チェッカークラス
  */
 
-namespace Libraries\StrCheck;
+namespace libraries\checker;
 
 class Checker
 {
@@ -24,7 +24,7 @@ class Checker
     }
 
     public function checkAlphanumeric() {
-        $checker = new AlphaumericCheckBuilder($this->str);
+        $checker = new AlphanumericCheckBuilder($this->str);
         return $checker->check($this->str);
     }
 }
@@ -58,7 +58,7 @@ class NumCheckBuilder extends CheckBuilder
 {
     public function check($str)
     {
-        if (preg_match("/[0-9]/", $str)){
+        if (preg_match("/[0-9]/", $str)) {
             return false;
         } else {
             return true;
@@ -73,7 +73,7 @@ class AlphanumericCheckBuilder extends CheckBuilder
 {
     public function check($str)
     {
-        if (!preg_match("/[^a-zA-Z0-9]/", $str)){
+        if (!preg_match("/[^a-zA-Z0-9]/", $str)) {
             return true;
         } else {
             return false;
