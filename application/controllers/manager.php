@@ -2,6 +2,7 @@
 
 use libraries\checker;
 require_once(dirname(__file__) . "/../libraries/checker.php");
+require_once(dirname(__file__) . "/../libraries/text_builder.php");
 require_once(dirname(__file__) . "/../models/history_repository.php");
 
 class Manager extends CI_Controller {
@@ -11,7 +12,10 @@ class Manager extends CI_Controller {
      */
     public function top()
     {
+        $builder = new Text_Builder();
+        HistoryRepository::save($builder->build("aaa", "bigecho"));
         $histores = HistoryRepository::findAll();
+
         $this->view['data'] = $histores;
         $this->load->view('top', $this->view);
     }

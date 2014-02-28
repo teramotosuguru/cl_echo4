@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 /**
 * テキストビルダー
 */
-class Text_Builder 
+class Text_Builder
 {
 	public function build($s="", $p = "") {
         return new Text($s, $p);
@@ -28,7 +28,7 @@ class Text
 	}
 
 	// 文字列のゲッター
-	public function get_text() {
+	public function getText() {
 		return $this->text;
 	}
 
@@ -66,7 +66,7 @@ class Text
 		foreach(str_split($this->text) as $key => $value) {
 			// 大文字かどうか
 			if(ctype_upper($value) == TRUE) {
-				
+
 				// 小文字に変換
 				$value = strtolower($value);
 
@@ -77,7 +77,7 @@ class Text
 			}
 			$snake_text = $snake_text.$value;
 		}
-	
+
 		$this->text = $snake_text;
 	}
 
@@ -105,7 +105,7 @@ class Text
 			case 'snakeecho':
 				$this->$param();
 				break;
-				
+
 			default:
 				break;
 		}
