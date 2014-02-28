@@ -2,12 +2,22 @@
 
 use libraries\checker;
 require_once(dirname(__file__) . "/../libraries/checker.php");
+require_once(dirname(__file__) . "/../models/history_repository.php");
 
 class Manager extends CI_Controller {
 
     /**
-    * 文字列をそのまま吐き出す
-    */
+     * トップページ
+     */
+    public function top()
+    {
+        $histores = HistoryRepository::findAll();
+        $this->view['data'] = $histores;
+        $this->load->view('top', $this->view);
+    }
+    /**
+     * 文字列をそのまま吐き出す
+     */
     public function normal($str="")
     {
         /*チェックするよお*/
@@ -27,8 +37,8 @@ class Manager extends CI_Controller {
     }
 
     /**
-    * 大文字に変換
-    */
+     * 大文字に変換
+     */
     public function bigecho($str="")
     {
         $this->load->library('checker');
@@ -38,8 +48,8 @@ class Manager extends CI_Controller {
     }
 
     /**
-    * 小文字に変換
-    */
+     * 小文字に変換
+     */
     public function smallecho($str="")
     {
         $this->load->library('checker');
@@ -49,8 +59,8 @@ class Manager extends CI_Controller {
     }
 
     /**
-    * キャメルに変換
-    */
+     * キャメルに変換
+     */
     public function camelecho($str="")
     {
         $this->load->library('checker');
@@ -60,8 +70,8 @@ class Manager extends CI_Controller {
     }
 
     /**
-    * スネークに変換
-    */
+     * スネークに変換
+     */
     public function snakeecho($str="")
     {
         $this->load->library('checker');
@@ -71,8 +81,8 @@ class Manager extends CI_Controller {
     }
 
     /**
-    * 履歴を表示
-    */
+     * 履歴を表示
+     */
     public function history($str="")
     {
         $this->load->library('checker');
@@ -83,8 +93,8 @@ class Manager extends CI_Controller {
 
 
     /**
-    * 入力履歴を表示
-    */
+     * 入力履歴を表示
+     */
     public function historyecho($no)
     {
         $this->load->library('checker');

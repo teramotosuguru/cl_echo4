@@ -1,7 +1,7 @@
 <?php
 
-require_once(dirname(__file__) . "../../../system/core/Model.php");
-require_once(dirname(__file__) . "../../libraries/text_builder.php");
+require_once(dirname(__file__) . "/../../system/core/Model.php");
+require_once(dirname(__file__) . "/../libraries/text_builder.php");
 /**
  * ヒストリーリポジトリー
  */
@@ -21,9 +21,10 @@ class HistoryRepository extends CI_Model
         $params = array();
         $object = $this->db->query($sql, $params)->result();
         $histories_tmp = array();
+        $builder = new Text_Builder();
+
         foreach ( $object as $key => $value) {
-            $text = new Text($value->text);
-            $histories_tmp[]  = new History($value->id, $text);
+            $histories_tmp[$value->id]  = new History($value->id,  $builder->build($value->text));
         }
         $histories = new Histories($histories_tmp);
         return $histories->getAll();
@@ -41,9 +42,9 @@ class HistoryRepository extends CI_Model
         $params = array($id);
         $object = $this->db->query($sql, $params)->result();
         $histories_tmp = array();
+        $builder = new Text_Builder();
         foreach ( $object as $key => $value) {
-            $text = new Text($value->text);
-            $histories_tmp[]  = new History($value->id, $text);
+            $histories_tmp[$value->id]  = new History($value->id, $builder->build($value->text));
         }
         $histories = new Histories($histories_tmp);
         return $histories->getById($id);
@@ -58,7 +59,7 @@ class HistoryRepository extends CI_Model
     public function save($text)
     {
         $data = array(
-                "text" => $text,
+                "text" => $text->get_tezt(),
                 "created" => date("Y-m-d H:i:s", time())
         );
         return $this->db->insert("t_texts", $data);
