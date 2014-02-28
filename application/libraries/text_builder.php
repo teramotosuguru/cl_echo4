@@ -88,22 +88,22 @@ class Text
 
 			// 大文字に変換
 			case 'bigecho':
-				$this->convert_big();
+				$this->$param();
 				break;
 
 			// 小文字に変換
 			case 'smallecho':
-				$this->convert_small();
+				$this->$param();
 				break;
 
 			// キャメルに変換
 			case 'camelecho':
-				$this->convert_camel();
+				$this->$param();
 				break;
 
 			// スネークに変換
 			case 'snakeecho':
-				$this->convert_snake();
+				$this->$param();
 				break;
 				
 			default:
