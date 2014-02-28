@@ -20,10 +20,10 @@ class HistoryRepository extends CI_Model
         $sql = "SELECT * FROM t_texts";
         $params = array();
         $object = $this->db->query($sql, $params)->result();
+        $histories_tmp = array();
         foreach ( $object as $key => $value) {
-//             $text = new Text($value->text);
-            $history = new History($value->id, $value->text);
-            $histories_tmp[] = $history;
+            $text = new Text($value->text);
+            $histories_tmp[]  = new History($value->id, $text);
         }
         $histories = new Histories($histories_tmp);
         return $histories->getAll();
@@ -40,12 +40,12 @@ class HistoryRepository extends CI_Model
         $sql = "SELECT * FROM t_texts WHERE id = ? ;";
         $params = array($id);
         $object = $this->db->query($sql, $params)->result();
+        $histories_tmp = array();
         foreach ( $object as $key => $value) {
             $text = new Text($value->text);
-            $history = new History($value->id, $text);
-            $histories[$value->id] = $history;
+            $histories_tmp[]  = new History($value->id, $text);
         }
-        $histories = new Histories($histories);
+        $histories = new Histories($histories_tmp);
         return $histories->getById($id);
     }
 
