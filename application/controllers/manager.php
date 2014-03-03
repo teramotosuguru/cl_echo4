@@ -8,15 +8,6 @@ require_once(dirname(__file__) . "/../models/history_repository.php");
 class Manager extends CI_Controller {
 
     /**
-     * トップページ
-     */
-    public function top()
-    {
-        $this->view['data'] = $histores;
-        $this->load->view('top', $this->view);
-    }
-
-    /**
      * 文字列をそのまま吐き出す
      */
     public function normal($str="")

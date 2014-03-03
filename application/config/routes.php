@@ -38,7 +38,7 @@
 |
 */
 $route['(:any)'] = "manager/$1";
-$route['default_controller'] = "manager/top";
+$route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
 
