@@ -18,6 +18,11 @@ class Checker
         return $checker->check($this->str);
     }
 
+    public function checkWithNum() {
+        $checker = new WithNumCheckBuilder($this->str);
+        return $checker->check($this->str);
+    }
+
     public function checkNum() {
         $checker = new NumCheckBuilder($this->str);
         return $checker->check($this->str);
@@ -52,16 +57,31 @@ class EmptyCheckBuilder extends CheckBuilder
 }
 
 /**
- * 数字チェック（問題なければtrue/数字が含まれていればfalse）
+ * 数字が含まれているかチェック（問題なければtrue/数字が含まれていればfalse）
+ */
+class WithNumCheckBuilder extends CheckBuilder
+{
+    public function check($str)
+    {
+        if (!preg_match("/[0-9]/", $str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+/**
+ * 数字かどうかチェック（問題なければtrue/数字以外ならfalse）
  */
 class NumCheckBuilder extends CheckBuilder
 {
     public function check($str)
     {
-        if (preg_match("/[0-9]/", $str)) {
-            return false;
-        } else {
+        if (is_numeric($str)) {
             return true;
+        } else {
+            return false;
         }
     }
 }
