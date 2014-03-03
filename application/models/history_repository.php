@@ -27,7 +27,9 @@ class HistoryRepository extends CI_Model
             $histories_tmp[$value->id]  = new History($value->id,  $builder->build($value->text));
         }
         $histories = new Histories($histories_tmp);
+
         return $histories->getAll();
+
     }
 
     /**
@@ -38,7 +40,7 @@ class HistoryRepository extends CI_Model
      */
     public function findById($id)
     {
-        $sql = "SELECT * FROM t_texts WHERE id = ? ";
+        $sql = "SELECT * FROM t_texts WHERE id = ? ;";
         $params = array($id);
         $object = $this->db->query($sql, $params)->result();
         $histories_tmp = array();
@@ -47,7 +49,7 @@ class HistoryRepository extends CI_Model
             $histories_tmp[$value->id]  = new History($value->id, $builder->build($value->text));
         }
         $histories = new Histories($histories_tmp);
-        return $histories->getById($id);
+        return array($histories->getById($id));
     }
 
     /**

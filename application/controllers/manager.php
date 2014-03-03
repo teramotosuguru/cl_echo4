@@ -50,6 +50,8 @@ class Manager extends CI_Controller {
         // チェック
         $checker = new libraries\checker\Checker();
         $checker->checkEmpty($str);
+        $checker->checkNum($str);
+        $checker->checkAlphanumeric($str);
 
         // Textクラスを生成
         $builder = new Text_Builder();
@@ -75,6 +77,8 @@ class Manager extends CI_Controller {
         // チェック
         $checker = new libraries\checker\Checker();
         $checker->checkEmpty($str);
+        $checker->checkNum($str);
+        $checker->checkAlphanumeric($str);
 
         // Textクラスを生成
         $builder = new Text_Builder();
@@ -100,6 +104,7 @@ class Manager extends CI_Controller {
         // チェック
         $checker = new libraries\checker\Checker();
         $checker->checkEmpty($str);
+        $checker->checkAlphanumeric($str);
 
         // Textクラスを生成
         $builder = new Text_Builder();
@@ -125,6 +130,7 @@ class Manager extends CI_Controller {
         // チェック
         $checker = new libraries\checker\Checker();
         $checker->checkEmpty($str);
+        $checker->checkAlphanumeric($str);
 
         // Textクラスを生成
         $builder = new Text_Builder();
@@ -149,7 +155,7 @@ class Manager extends CI_Controller {
     {
         // リポジトリクラス作成
         $repository = new HistoryRepository();
-        // 履歴取得
+        // 履歴全件取得
         $histores = $repository->findAll();
 
         $this->view['data'] = $histores;
@@ -164,13 +170,15 @@ class Manager extends CI_Controller {
     {
 
         // チェック
-//         $checker = new libraries\checker\Checker();
-//         $checker->checkEmpty($str);
+        $checker = new libraries\checker\Checker();
+        $checker->checkEmpty($no);
+        $checker->checkAlphanumeric($no);
 
         // リポジトリクラス作成
         $repository = new HistoryRepository();
-        // 履歴取得
-        $histores[] = $repository->findById($no);
+
+        // 履歴を一件取得
+        $histores = $repository->findById($no);
 
         $this->view['data'] = $histores;
         $this->load->view('results', $this->view);
