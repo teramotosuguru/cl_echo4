@@ -38,7 +38,7 @@ class HistoryRepository extends CI_Model
      */
     public function findById($id)
     {
-        $sql = "SELECT * FROM t_texts WHERE id = ? ;";
+        $sql = "SELECT * FROM t_texts WHERE id = ? ";
         $params = array($id);
         $object = $this->db->query($sql, $params)->result();
         $histories_tmp = array();
@@ -58,11 +58,13 @@ class HistoryRepository extends CI_Model
      */
     public function save($text)
     {
-        $data = array(
-                "text" => $text->get_tezt(),
+//         $sql = "INSERT INTO  `t_texts` (`text` ,`created`) VALUES ( ?, ? ) ";
+        $params = array(
+                "text" => $text->getText(),
                 "created" => date("Y-m-d H:i:s", time())
         );
-        return $this->db->insert("t_texts", $data);
+        return $this->db->insert("t_texts", $params);
+//         return $this->db->query($sql, $params);
     }
 
 }

@@ -35,7 +35,7 @@ if (defined('ENVIRONMENT'))
 		case 'development':
 			error_reporting(E_ALL);
 		break;
-	
+
 		case 'testing':
 		case 'production':
 			error_reporting(0);
@@ -203,3 +203,9 @@ require_once BASEPATH.'core/CodeIgniter.php';
 
 /* End of file index.php */
 /* Location: ./index.php */
+
+
+ini_set('log_errors',TRUE);
+ini_set('html_errors',FALSE);
+ini_set('error_log', APPPATH.'tmp/logs/php_error.log');
+
