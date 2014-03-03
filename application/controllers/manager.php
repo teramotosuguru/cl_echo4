@@ -22,8 +22,10 @@ class Manager extends CI_Controller {
     public function normal($str="")
     {
         // チェック
-        $checker = new libraries\checker\Checker();
-        $checker->checkEmpty($str);
+        $checker = new libraries\checker\Checker($str);
+        if(!$checker->checkEmpty($str)){
+            return $this->load->view('error', "");
+        }
 
         // Textクラスを生成
         $builder = new Text_Builder();
@@ -48,10 +50,11 @@ class Manager extends CI_Controller {
     public function bigecho($str="")
     {
         // チェック
-        $checker = new libraries\checker\Checker();
-        $checker->checkEmpty($str);
-        $checker->checkNum($str);
-        $checker->checkAlphanumeric($str);
+        $checker = new libraries\checker\Checker($str);
+
+        if(!$checker->checkEmpty($str) || !$checker->checkWithNum($str) || !$checker->checkAlphanumeric($str)){
+            return $this->load->view('error', "");
+        }
 
         // Textクラスを生成
         $builder = new Text_Builder();
@@ -75,10 +78,11 @@ class Manager extends CI_Controller {
     public function smallecho($str="")
     {
         // チェック
-        $checker = new libraries\checker\Checker();
-        $checker->checkEmpty($str);
-        $checker->checkNum($str);
-        $checker->checkAlphanumeric($str);
+        $checker = new libraries\checker\Checker($str);
+
+        if(!$checker->checkEmpty($str) || !$checker->checkWithNum($str) || !$checker->checkAlphanumeric($str)){
+            return $this->load->view('error', "");
+        }
 
         // Textクラスを生成
         $builder = new Text_Builder();
@@ -102,9 +106,10 @@ class Manager extends CI_Controller {
     public function camelecho($str="")
     {
         // チェック
-        $checker = new libraries\checker\Checker();
-        $checker->checkEmpty($str);
-        $checker->checkAlphanumeric($str);
+        $checker = new libraries\checker\Checker($str);
+        if(!$checker->checkEmpty($str) || !$checker->checkWithNum($str) || !$checker->checkAlphanumeric($str)){
+            return $this->load->view('error', "");
+        }
 
         // Textクラスを生成
         $builder = new Text_Builder();
@@ -128,9 +133,10 @@ class Manager extends CI_Controller {
     public function snakeecho($str="")
     {
         // チェック
-        $checker = new libraries\checker\Checker();
-        $checker->checkEmpty($str);
-        $checker->checkAlphanumeric($str);
+        $checker = new libraries\checker\Checker($str);
+        if(!$checker->checkEmpty($str) || !$checker->checkWithNum($str) || !$checker->checkAlphanumeric($str)){
+            return $this->load->view('error', "");
+        }
 
         // Textクラスを生成
         $builder = new Text_Builder();
@@ -162,18 +168,17 @@ class Manager extends CI_Controller {
         $this->load->view('results', $this->view);
     }
 
-
     /**
      * 入力履歴を表示
      */
-    public function historyecho($no)
+    public function historyecho($no = "")
     {
 
         // チェック
-        $checker = new libraries\checker\Checker();
-        $checker->checkEmpty($no);
-        $checker->checkAlphanumeric($no);
-        $checker->checkWithNum($no);
+        $checker = new libraries\checker\Checker($no);
+        if( !$checker->checkNum($no)){
+            return $this->load->view('error', "");
+        }
 
         // リポジトリクラス作成
         $repository = new HistoryRepository();

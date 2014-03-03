@@ -92,7 +92,7 @@ class Histories
      */
     public function getById($id)
     {
-        return $this->histories[$id];
+        return empty($this->histories[$id]) ?  "" : $this->histories[$id];
     }
 
     /**

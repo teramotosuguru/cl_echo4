@@ -1,2 +1,3 @@
 .vagrant
 application/config/database.php
+org.eclipse.core.resources.prefs
