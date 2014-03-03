@@ -40,7 +40,7 @@ class HistoryRepository extends CI_Model
      */
     public function findById($id)
     {
-        $sql = "SELECT * FROM t_texts WHERE id = ? ;";
+        $sql = "SELECT * FROM t_texts WHERE id = ? ";
         $params = array($id);
         $object = $this->db->query($sql, $params)->result();
         $histories_tmp = array();

@@ -173,6 +173,7 @@ class Manager extends CI_Controller {
         $checker = new libraries\checker\Checker();
         $checker->checkEmpty($no);
         $checker->checkAlphanumeric($no);
+        $checker->checkWithNum($no);
 
         // リポジトリクラス作成
         $repository = new HistoryRepository();
