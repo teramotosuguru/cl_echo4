@@ -37,8 +37,8 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-
-$route['default_controller'] = "welcome";
+$route['(:any)'] = "manager/$1";
+$route['default_controller'] = "manager/top";
 $route['404_override'] = '';
 
 
